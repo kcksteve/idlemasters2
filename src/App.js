@@ -1,10 +1,10 @@
 import './App.css';
-import NavbarMobile from './Components/Navbar/NavbarMobile';
+import GamePage from './pages/GamePage';
 
 function App() {
   return (
     <div className="App">
-      <NavbarMobile/>
+      <GamePage/>
     </div>
   );
 }

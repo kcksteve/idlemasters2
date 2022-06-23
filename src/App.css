@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-button {
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background-color: rgb(52, 52, 52);
+}
+
+.nav-icon {
+  height: 40px;
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.nav-text {
+  font-size: 35px;
+  display: inline-block;
+}
+
+.ui-bg {
+  background-color: rgb(42, 42, 42);
+  color: white;
+}
+
+.game-layout {
+  min-height: 100vh;
+}
+
+.game-page {
+  
+}

@@ -6,10 +6,10 @@ const NavbarButtons = () => {
     return (
       NAVBARBUTTONS.map(({id, title, image}) => {
         return (
-          <Row key={id}>
-            <Col className='py-4'>
-              <NavbarButton title={title} image={image}/>
-            </Col>
+          <Row className='py-4 nav-button' key={id}>
+              <Col>
+                <NavbarButton title={title} image={image}/>
+              </Col>
           </Row>
         );
       })

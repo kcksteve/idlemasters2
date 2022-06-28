@@ -1,4 +1,5 @@
 import { Col } from "reactstrap";
+import NAVBARBUTTONS from "./navBarButttonInfo";
 
 const NavbarButton = ({title, image}) => {
     return (

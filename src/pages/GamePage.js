@@ -3,6 +3,10 @@ import NavbarGame from "../Components/Navbar/NavbarGame";
 import LayoutFishing from "../Components/GameLayouts/LayoutFishing";
 import Background from '../assets/img/Background.jpg'
 
+const Box4 = () => {
+    return (<section>Box 4</section>)
+}
+
 const GamePage = () => {
     return (
         <Container fluid className='m-0 p-0' style={{

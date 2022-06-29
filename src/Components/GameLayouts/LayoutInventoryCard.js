@@ -11,7 +11,9 @@ const LayoutInventoryCard = () => {
                     <h1 className="card-title">Inventory</h1>
                 </Col>
             </Row>
-
+            <Row>
+                
+            </Row>
         </Row>
     );
 }

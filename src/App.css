@@ -37,7 +37,7 @@
   }
 }
 
-.nav-button {
+.clickable {
   cursor: pointer;
 }
 
@@ -76,4 +76,20 @@
   font-size: 45px;
   text-align: left;
   float: left;
+}
+
+.inv-icon {
+  height: 50px;
+}
+
+.inv-text {
+  font-size: 30px;
+}
+
+.stat-text {
+  font-size: 27px;
+  font-weight: 600;
+  text-align: right;
+  margin: 0;
+  padding-right: 20px;
 }

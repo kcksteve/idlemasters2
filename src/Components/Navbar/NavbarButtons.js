@@ -1,14 +1,22 @@
 import { Col, Row } from "reactstrap";
 import NavbarButton from "./NavbarButton";
-import NAVBARBUTTONS from "./navBarButttonInfo";
+import { useSelector, useDispatch } from "react-redux";
+import { selectActivities, setCurrentActivity } from "../../shared/activitySlice";
 
-const NavbarButtons = () => {
+const NavbarButtons = ({ classPass }) => {
+    const dispatch = useDispatch();
     return (
-      NAVBARBUTTONS.map(({id, title, image}) => {
+      useSelector(selectActivities).map(({id, title, image}) => {
         return (
-          <Row className='py-4 nav-button' key={id}>
+          <Row className={ 'py-4 nav-button clickable ' + classPass }
+            key={id}
+            onClick={() => dispatch(setCurrentActivity(id))}
+          >
               <Col>
-                <NavbarButton title={title} image={image}/>
+                <NavbarButton
+                  title={title}
+                  image={image}
+                />
               </Col>
           </Row>
         );

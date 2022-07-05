@@ -3,14 +3,14 @@ import LayoutTitleCard from "./LayoutTitleCard";
 import LayoutInventoryCard from "./LayoutInventoryCard";
 import LayoutStatCard from "./LayoutStatCard";
 
-const LayoutFishing = () => {
+const LayoutForaging = () => {
     return (
         <Col xs='12' lg='9' className="game-layout">
-            <LayoutTitleCard activityId='0'/>
+            <LayoutTitleCard activityId='1'/>
             <LayoutInventoryCard/>
             <LayoutStatCard/>
         </Col>
     );
 }
 
-export default LayoutFishing;
+export default LayoutForaging;

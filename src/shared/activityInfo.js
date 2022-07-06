@@ -5,6 +5,13 @@ import IconPick from '../assets/img/IconPick.png'
 import IconPotion from '../assets/img/IconPotion.png'
 import IconHammer from '../assets/img/IconHammer.png'
 import IconSkull from '../assets/img/IconSkull.png'
+import LayoutFishing from '../Components/GameLayouts/LayoutFishing'
+import LayoutForaging from '../Components/GameLayouts/LayoutForaging'
+import LayoutLogging from '../Components/GameLayouts/LayoutLogging'
+import LayoutMining from '../Components/GameLayouts/LayoutMining'
+import LayoutAlchemy from '../Components/GameLayouts/LayoutAlchemy'
+import LayoutSmithing from '../Components/GameLayouts/LayoutSmithing'
+import LayoutCombat from '../Components/GameLayouts/LayoutCombat'
 
 const ACTIVITYINFO = [
     {
@@ -15,7 +22,8 @@ const ACTIVITYINFO = [
         isConsumable: true,
         xp: 0,
         level: 1,
-        resource: 0
+        resource: 0,
+        component: <LayoutFishing/>
     },
     {
         id: 1,
@@ -25,7 +33,8 @@ const ACTIVITYINFO = [
         isConsumable: false,
         xp: 0,
         level: 1,
-        resource: 0
+        resource: 0,
+        component: <LayoutForaging/>
     },
     {
         id: 2,
@@ -35,7 +44,8 @@ const ACTIVITYINFO = [
         isConsumable: false,
         xp: 0,
         level: 1,
-        resource: 0
+        resource: 0,
+        component: <LayoutLogging/>
     },
     {
         id: 3,
@@ -45,7 +55,8 @@ const ACTIVITYINFO = [
         isConsumable: false,
         xp: 0,
         level: 1,
-        resource: 0
+        resource: 0,
+        component: <LayoutMining/>
     },
     {
         id: 4,
@@ -55,7 +66,8 @@ const ACTIVITYINFO = [
         isConsumable: true,
         xp: 0,
         level: 1,
-        resource: 0
+        resource: 0,
+        component: <LayoutAlchemy/>
     },
     {
         id: 5,
@@ -64,7 +76,8 @@ const ACTIVITYINFO = [
         hasInventory: false,
         isConsumable: false,
         xp: 0,
-        level: 1
+        level: 1,
+        component: <LayoutSmithing/>
     },
     {
         id: 6,
@@ -73,7 +86,8 @@ const ACTIVITYINFO = [
         hasInventory: false,
         isConsumable: false,
         xp: 0,
-        level: 1
+        level: 1,
+        component: <LayoutCombat/>
     }
 ]
 

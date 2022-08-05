@@ -93,3 +93,20 @@
   margin: 0;
   padding-right: 20px;
 }
+
+.save-slot-1 {
+  width: 80%;
+  height: 100%;
+  font-size: 50px;
+  margin-right: 3%;
+}
+
+.save-slot-2 {
+  width: 17%;
+  height: 100%;
+  font-size: 50px;
+}
+
+.save-slot-delete {
+  height: 20px;
+}

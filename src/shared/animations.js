@@ -1,5 +1,3 @@
-import { useSpring } from "react-spring"
-
 export const animLayoutLoad = {
     to: {
         opacity: 1,
@@ -8,5 +6,17 @@ export const animLayoutLoad = {
     from: {
         opacity: 0,
         x: 10
+    }
+}
+
+export const animPageLoad = {
+    to: {
+        opacity: 1,
+    },
+    from: {
+        opacity: 0,
+    },
+    config: {
+        tension: 80
     }
 }

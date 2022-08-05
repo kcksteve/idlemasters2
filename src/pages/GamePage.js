@@ -1,22 +1,21 @@
-import { Container, Row } from "reactstrap";
+import { Row } from "reactstrap";
 import NavbarGame from "../Components/Navbar/NavbarGame";
-import Background from '../assets/img/Background.jpg'
 import { useSelector } from "react-redux";
 import { selectCurrentActivity } from "../shared/activitySlice";
+import { animated, useSpring } from "react-spring";
+import { animPageLoad } from "../shared/animations";
 
 const GamePage = () => {
     let currentActivity = useSelector(selectCurrentActivity).component
+    const divStyle = useSpring(animPageLoad);
 
     return (
-        <Container fluid className='m-0 p-0' style={{
-            backgroundImage: `url(${Background})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'}}>
+        <animated.div style={divStyle}>
             <Row className="m-0">
                 <NavbarGame/>
                 {currentActivity}
             </Row>
-        </Container>
+        </animated.div>
     );
 }
 

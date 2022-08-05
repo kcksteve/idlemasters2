@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import ACTIVITYINFO from "./activityInfo.js"
 import { STATINFO } from './statInfo.js';
+import SAVES from './saves.js';
 
 const initialState = {
     currentActivity: 0,
+    currentPage: 0,
+    currentSave: 0,
     activities: ACTIVITYINFO,
-    stats: STATINFO
+    stats: STATINFO,
+    saves: SAVES
 }
 
 const activitySlice = createSlice({
@@ -14,6 +18,9 @@ const activitySlice = createSlice({
     reducers: {
         setCurrentActivity: (state, action) => {
             state.currentActivity = action.payload;
+        },
+        setPage: (state, action) => {
+            state.currentPage = action.payload;
         }
     }
 });
@@ -36,4 +43,14 @@ export const selectActivityById = (id) => (state) => {
 
 export const selectStats = (state) => {
     return state.activity.stats;
+}
+
+export const selectPage = (state) => {
+    return state.activity.currentPage;
+}
+
+export const { setPage } = activitySlice.actions;
+
+export const selectSlotById = (id) => (state) => {
+    return state.activity.saves.find((cur) => cur.slotId === parseInt(id));
 }

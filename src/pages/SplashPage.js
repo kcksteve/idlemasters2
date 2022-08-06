@@ -1,11 +1,27 @@
-import { Row, Col, Modal, ModalBody, ModalHeader, Button, Container } from "reactstrap";
+import { Row, Col, Modal, ModalBody, ModalHeader, Button, Container, Input } from "reactstrap";
 import Logo from '../assets/img/Logo.png';
 import SaveSlot from "../Components/SplashScreen/SaveSlot";
+import { loadSaves, selectSlotById, selectCurrentSave, deleteSaveById, setCurrentSave, setSaveNameById, setPage } from "../shared/activitySlice";
 import { animated, useSpring } from "react-spring";
 import { animPageLoad } from "../shared/animations";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 const SplashPage = () => {
     const divStyle = useSpring(animPageLoad);
+
+    //localStorage.setItem('SLOTNAME1', 'Tom');
+
+    const dispatch = useDispatch();
+    dispatch(loadSaves(""));
+
+    const [showNewGameModal, setShowNewGameModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [nameErrorMsg, setNameErrorMsg] = useState('');
+    const [name, setName] = useState('');
+
+    const currentSaveId = useSelector(selectCurrentSave);
+    const currentSave = useSelector(selectSlotById(currentSaveId));
 
     return(
         <animated.div style={divStyle}>
@@ -18,22 +34,22 @@ const SplashPage = () => {
                     </Row>
                     <Row className="justify-content-center py-3">
                         <Col xs='10'>
-                            <SaveSlot slotId={1}/>
+                            <SaveSlot slotId={1} setShowNewGameModal={setShowNewGameModal} setShowDeleteModal={setShowDeleteModal}/>
                         </Col>
                     </Row>
                     <Row className="justify-content-center py-3">
                         <Col xs='10'>
-                            <SaveSlot slotId={2}/>
+                            <SaveSlot slotId={2} setShowNewGameModal={setShowNewGameModal} setShowDeleteModal={setShowDeleteModal}/>
                         </Col>
                     </Row>
                     <Row className="justify-content-center pt-3 pb-5">
                         <Col xs='10'>
-                            <SaveSlot slotId={3}/>
+                            <SaveSlot slotId={3} setShowNewGameModal={setShowNewGameModal} setShowDeleteModal={setShowDeleteModal}/>
                         </Col>
                     </Row>
                 </Col>
             </Row>
-            <Modal isOpen={true}>
+            <Modal isOpen={showNewGameModal}>
                 <ModalHeader className="ui-bg">
                     Welcome Adventurer!
                 </ModalHeader>
@@ -53,12 +69,74 @@ const SplashPage = () => {
                         What should we call you noble adventurer?
                     </p>
                     <Container>
+                        <Row className="my-4 px-3">
+                            <Input
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <p className="my-0 text-danger">{nameErrorMsg}</p>
+                        </Row>
                         <Row>
                             <Col xs='8'>
-                                <Button className="btn-success w-100">Begin Adventure</Button>
+                                <Button
+                                    className="btn-success w-100"
+                                    onClick={() => {
+                                        if (name.length > 0) {
+                                            dispatch(setSaveNameById([currentSaveId, name]))
+                                            setNameErrorMsg('');
+                                            setShowNewGameModal(false);
+                                            dispatch(setPage(1));
+                                        }
+                                        else {
+                                            setNameErrorMsg('*Please enter a name*');
+                                        }
+                                    }}
+                                >Begin Adventure</Button>
                             </Col>
                             <Col xs='4'>
-                                <Button className="btn-danger w-100">Cancel</Button>
+                                <Button
+                                    className="btn-danger w-100"
+                                    onClick={() => {
+                                        setNameErrorMsg('');
+                                        setShowNewGameModal(false);
+                                    }}
+                                >
+                                    Cancel
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Container>
+                </ModalBody>
+            </Modal>
+            <Modal isOpen={showDeleteModal}>
+                <ModalHeader className="ui-bg">
+                    Delete Character
+                </ModalHeader>
+                <ModalBody className="ui-bg">
+                    Are you sure you want to delete the character {currentSaveId > 0 ? currentSave.slotName : ''}?
+                    <Container className='py-4'>
+                        <Row>
+                            <Col xs='8'>
+                                <Button
+                                    className="btn-warning w-100"
+                                    onClick={() => {
+                                        dispatch(deleteSaveById(currentSaveId));
+                                        dispatch(setCurrentSave(0));
+                                        setShowDeleteModal(false);
+                                    }}
+                                >
+                                    Delete
+                                </Button>
+                            </Col>
+                            <Col xs='4'>
+                                <Button
+                                    className="btn-danger w-100"
+                                    onClick={() => {
+                                        dispatch(setCurrentSave(0));
+                                        setShowDeleteModal(false);
+                                    }}
+                                >
+                                    Cancel
+                                </Button>
                             </Col>
                         </Row>
                     </Container>

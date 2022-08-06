@@ -19,8 +19,30 @@ const activitySlice = createSlice({
         setCurrentActivity: (state, action) => {
             state.currentActivity = action.payload;
         },
+        setCurrentSave: (state, action) => {
+            state.currentSave = action.payload;
+        },
         setPage: (state, action) => {
             state.currentPage = action.payload;
+        },
+        loadSaves: (state, action) => {
+            state.saves.forEach(save => {
+                const slot = localStorage.getItem('SLOTNAME' + save.slotId)
+
+                if (slot) {
+                    save.slotName = slot;
+                }
+            });
+        },
+        deleteSaveById: (state, action) => {
+            let found = state.saves.find(save => save.slotId === action.payload)
+            found.slotName = '';
+            localStorage.setItem('SLOTNAME' + action.payload, '');
+        },
+        setSaveNameById: (state, action) => {
+            let found = state.saves.find(save => save.slotId === action.payload[0])
+            found.slotName = action.payload[1];
+            localStorage.setItem('SLOTNAME' + action.payload[0], action.payload[1]);
         }
     }
 });
@@ -54,3 +76,15 @@ export const { setPage } = activitySlice.actions;
 export const selectSlotById = (id) => (state) => {
     return state.activity.saves.find((cur) => cur.slotId === parseInt(id));
 }
+
+export const { loadSaves } = activitySlice.actions;
+
+export const selectCurrentSave = (state) => {
+    return state.activity.currentSave;
+}
+
+export const { setCurrentSave } = activitySlice.actions;
+
+export const { deleteSaveById } = activitySlice.actions;
+
+export const { setSaveNameById } = activitySlice.actions;

@@ -6,7 +6,7 @@ import { selectSlotById } from "../../shared/activitySlice";
 const SaveSlot = ({ slotId }) => {
     const slotName = useSelector(selectSlotById(slotId)).slotName;
     const slotText = "SAVE #" + slotId + " " + (slotName ? "<" + slotName + ">" : "<Empty>");
-    const slotCanDelete = false;
+    let slotCanDelete = false;
 
     if (slotName) {
         slotCanDelete = true;

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "reactstrap";
 import DeleteImg from '../../assets/img/delete.png'
-import { selectSlotById, setPage, setCurrentSave } from "../../shared/activitySlice";
+import { selectSlotById, setPage, setCurrentSave, loadAllStats } from "../../shared/activitySlice";
 
 const SaveSlot = ({ slotId, setShowNewGameModal, setShowDeleteModal }) => {
     const slotName = useSelector(selectSlotById(slotId)).slotName;
@@ -21,8 +21,8 @@ const SaveSlot = ({ slotId, setShowNewGameModal, setShowDeleteModal }) => {
                 onClick={() => {
                         dispatch(setCurrentSave(slotId))
                         if (slotName) {
-                            //ToDo Load all stats for save slot
-                            dispatch(setPage(1))
+                            dispatch(loadAllStats(''));
+                            dispatch(setPage(1));
                         }
                         else {
                             setShowNewGameModal(true);
@@ -36,7 +36,7 @@ const SaveSlot = ({ slotId, setShowNewGameModal, setShowDeleteModal }) => {
                 className='btn-danger save-slot-2 align-items-center justify-content-center'
                 disabled={!slotCanDelete}
                 onClick={() => {
-                    dispatch(setCurrentSave(slotId))
+                    dispatch(setCurrentSave(slotId));
                     setShowDeleteModal(true);
                 }}
             >

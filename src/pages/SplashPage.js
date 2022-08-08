@@ -1,7 +1,7 @@
 import { Row, Col, Modal, ModalBody, ModalHeader, Button, Container, Input } from "reactstrap";
 import Logo from '../assets/img/Logo.png';
 import SaveSlot from "../Components/SplashScreen/SaveSlot";
-import { loadSaves, selectSlotById, selectCurrentSave, deleteSaveById, setCurrentSave, setSaveNameById, setPage } from "../shared/activitySlice";
+import { loadSaves, selectSlotById, selectCurrentSave, deleteSaveById, setCurrentSave, setSaveNameById, setPage, loadAllStats, resetAllStats } from "../shared/activitySlice";
 import { animated, useSpring } from "react-spring";
 import { animPageLoad } from "../shared/animations";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import { useState } from "react";
 const SplashPage = () => {
     const divStyle = useSpring(animPageLoad);
 
-    //localStorage.setItem('SLOTNAME1', 'Tom');
+    //localStorage.setItem('1-Health-resource', '99');
 
     const dispatch = useDispatch();
     dispatch(loadSaves(""));
@@ -84,6 +84,8 @@ const SplashPage = () => {
                                             dispatch(setSaveNameById([currentSaveId, name]))
                                             setNameErrorMsg('');
                                             setShowNewGameModal(false);
+                                            dispatch(resetAllStats(''));
+                                            dispatch(loadAllStats(''));
                                             dispatch(setPage(1));
                                         }
                                         else {
@@ -120,6 +122,7 @@ const SplashPage = () => {
                                     className="btn-warning w-100"
                                     onClick={() => {
                                         dispatch(deleteSaveById(currentSaveId));
+                                        dispatch(resetAllStats(''));
                                         dispatch(setCurrentSave(0));
                                         setShowDeleteModal(false);
                                     }}

@@ -34,6 +34,54 @@ const activitySlice = createSlice({
                 }
             });
         },
+        loadAllStats: (state, action) => {
+            state.activities.forEach(act => {
+                const xp = localStorage.getItem(statStorageKey(state.currentSave, act.title, 'xp'))
+                if (act.hasOwnProperty('xp') && xp) {
+                    act.xp = parseInt(xp);
+                }
+
+                const lvl = localStorage.getItem(statStorageKey(state.currentSave, act.title, 'level'))
+                if (act.hasOwnProperty('level') && lvl) {
+                    act.level = parseInt(lvl);
+                }
+
+                const res = localStorage.getItem(statStorageKey(state.currentSave, act.title, 'resource'))
+                if (act.hasOwnProperty('resource') && res) {
+                    act.resource = parseInt(res);
+                }
+            });
+            state.stats.forEach(stat => {
+                const res = localStorage.getItem(statStorageKey(state.currentSave, stat.title, 'resource'))
+                if (stat.hasOwnProperty('resource') && res) {
+                    stat.resource = parseInt(res);
+                }
+            });
+        },
+        resetAllStats: (state, action) => {
+            state.activities.forEach(act => {
+                if (act.hasOwnProperty('xp')) {
+                    localStorage.setItem(statStorageKey(state.currentSave, act.title, 'xp'), '0');
+                    act.xp = 0;
+                }
+
+                if (act.hasOwnProperty('level')) {
+                    localStorage.setItem(statStorageKey(state.currentSave, act.title, 'level'), '1');
+                    act.level = 1;
+                }
+
+                if (act.hasOwnProperty('resource')) {
+                    localStorage.setItem(statStorageKey(state.currentSave, act.title, 'resource'), '0');
+                    act.resource = 0;
+                }
+            });
+            state.stats.forEach(stat => {
+                if (stat.hasOwnProperty('resource')) {
+                    localStorage.setItem(statStorageKey(state.currentSave, stat.title, 'resource'), '100')
+                    stat.resource = 100;
+                }
+            });
+        },
         deleteSaveById: (state, action) => {
             let found = state.saves.find(save => save.slotId === action.payload)
             found.slotName = '';
@@ -46,6 +94,10 @@ const activitySlice = createSlice({
         }
     }
 });
+
+const statStorageKey = (saveId, name, property) => {
+    return saveId + '-' + name + '-' + property;
+}
 
 export const activityReducer = activitySlice.reducer;
 
@@ -78,6 +130,11 @@ export const selectSlotById = (id) => (state) => {
 }
 
 export const { loadSaves } = activitySlice.actions;
+
+export const { loadAllStats } = activitySlice.actions;
+
+export const { resetAllStats } = activitySlice.actions;
+
 
 export const selectCurrentSave = (state) => {
     return state.activity.currentSave;

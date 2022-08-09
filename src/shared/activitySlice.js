@@ -77,10 +77,21 @@ const activitySlice = createSlice({
             });
             state.stats.forEach(stat => {
                 if (stat.hasOwnProperty('resource')) {
-                    localStorage.setItem(statStorageKey(state.currentSave, stat.title, 'resource'), '100')
+                    localStorage.setItem(statStorageKey(state.currentSave, stat.title, 'resource'), '100');
                     stat.resource = 100;
                 }
             });
+        },
+        updateStat: (state, action) => {
+            let stat = state.activities.find(act => act.title === action.payload.title);
+            if (!stat) {
+                stat = state.stats.find(act => act.title === action.payload.title);
+            }
+
+            if (stat.hasOwnProperty(action.payload.property)) {
+                stat[action.payload.property] += action.payload.amount;
+                localStorage.setItem(statStorageKey(state.currentSave, action.payload.title, action.payload.property), stat[action.payload.property]);
+            }
         },
         deleteSaveById: (state, action) => {
             let found = state.saves.find(save => save.slotId === action.payload)
@@ -135,6 +146,7 @@ export const { loadAllStats } = activitySlice.actions;
 
 export const { resetAllStats } = activitySlice.actions;
 
+export const { updateStat } = activitySlice.actions;
 
 export const selectCurrentSave = (state) => {
     return state.activity.currentSave;

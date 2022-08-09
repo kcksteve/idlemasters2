@@ -20,28 +20,28 @@ const GamePage = () => {
 
     switch (currentActivityId) {
         case 0:
-            currentActivity = <LayoutFishing/>;
+            currentActivity = <LayoutFishing activityId={currentActivityId}/>;
             break;
         case 1:
-            currentActivity = <LayoutForaging/>;
+            currentActivity = <LayoutForaging activityId={currentActivityId}/>;
             break;
         case 2:
-            currentActivity = <LayoutLogging/>;
+            currentActivity = <LayoutLogging activityId={currentActivityId}/>;
             break;
         case 3:
-            currentActivity = <LayoutMining/>;
+            currentActivity = <LayoutMining activityId={currentActivityId}/>;
             break;
         case 4:
-            currentActivity = <LayoutAlchemy/>;
+            currentActivity = <LayoutAlchemy activityId={currentActivityId}/>;
             break;
         case 5:
-            currentActivity = <LayoutSmithing/>;
+            currentActivity = <LayoutSmithing activityId={currentActivityId}/>;
             break;
         case 6:
-            currentActivity = <LayoutCombat/>;
+            currentActivity = <LayoutCombat activityId={currentActivityId}/>;
             break;
         default:
-            currentActivity = <LayoutFishing/>;
+            currentActivity = <LayoutFishing activityId={currentActivityId}/>;
     }
 
     return (

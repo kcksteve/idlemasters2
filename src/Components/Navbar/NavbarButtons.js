@@ -1,7 +1,7 @@
 import { Col, Row } from "reactstrap";
 import NavbarButton from "./NavbarButton";
 import { useSelector, useDispatch } from "react-redux";
-import { selectActivities, setCurrentActivity } from "../../shared/activitySlice";
+import { selectActivities, setCurrentActivity, setCurrentActivityRunning } from "../../shared/activitySlice";
 
 const NavbarButtons = ({ classPass }) => {
     const dispatch = useDispatch();
@@ -10,7 +10,10 @@ const NavbarButtons = ({ classPass }) => {
         return (
           <Row className={ 'py-4 nav-button clickable ' + classPass }
             key={id}
-            onClick={() => dispatch(setCurrentActivity(id))}
+            onClick={() => {
+              dispatch(setCurrentActivityRunning(false));
+              dispatch(setCurrentActivity(id));
+            }}
           >
               <Col>
                 <NavbarButton

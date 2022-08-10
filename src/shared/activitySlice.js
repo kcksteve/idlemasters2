@@ -5,6 +5,7 @@ import SAVES from './saves.js';
 
 const initialState = {
     currentActivity: 0,
+    currentActivityRunning: false,
     currentPage: 0,
     currentSave: 0,
     activities: ACTIVITYINFO,
@@ -18,6 +19,9 @@ const activitySlice = createSlice({
     reducers: {
         setCurrentActivity: (state, action) => {
             state.currentActivity = action.payload;
+        },
+        setCurrentActivityRunning: (state, action) => {
+            state.currentActivityRunning = action.payload;
         },
         setCurrentSave: (state, action) => {
             state.currentSave = action.payload;
@@ -118,6 +122,10 @@ export const selectCurrentActivity = (state) => {
     return state.activity.activities.find(cur => cur.id === state.activity.currentActivity);
 }
 
+export const selectCurrentActivityRunning = (state) => {
+    return state.activity.currentActivityRunning;
+}
+
 export const selectActivities = (state) => {
     return state.activity.activities;
 }
@@ -153,6 +161,8 @@ export const selectCurrentSave = (state) => {
 }
 
 export const { setCurrentSave } = activitySlice.actions;
+
+export const { setCurrentActivityRunning } = activitySlice.actions;
 
 export const { deleteSaveById } = activitySlice.actions;
 

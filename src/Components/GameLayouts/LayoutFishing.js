@@ -4,6 +4,7 @@ import { animLayoutLoad } from "../../shared/animations";
 import LayoutTitleCard from "./LayoutTitleCard";
 import LayoutInventoryCard from "./LayoutInventoryCard";
 import LayoutStatCard from "./LayoutStatCard";
+import LayoutActivityCard from "./LayoutActivityCard";
 
 const LayoutFishing = ({ activityId }) => {
     const divStyle = useSpring(animLayoutLoad);
@@ -14,6 +15,7 @@ const LayoutFishing = ({ activityId }) => {
                     <LayoutTitleCard activityId={activityId}/>
                     <LayoutInventoryCard/>
                     <LayoutStatCard/>
+                    <LayoutActivityCard/>
                 </animated.div>
             </Col>
 

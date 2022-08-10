@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentActivityRunning, setCurrentActivityRunning } from "../../shared/activitySlice";
+import { selectCurrentActivityRunning, setCurrentActivityRunning, selectCanStartActivity } from "../../shared/activitySlice";
 
 const LoadingBar = ({ duration }) => {
     const [progress, setProgress] = useState(0);
     const [elapsed, setElapsed] = useState(0);
     const isRunning = useSelector(selectCurrentActivityRunning);
+    const canStartActivity = useSelector(selectCanStartActivity);
     const dispatch = useDispatch();
 
     const startLoop = () => {
@@ -35,8 +36,14 @@ const LoadingBar = ({ duration }) => {
                     setProgress(Math.min(elapsed / duration * 100, 100));
                 }
                 else {
-                    setElapsed(0.1);
-                    setProgress(0);
+                    if (canStartActivity) {
+                        setElapsed(0.1);
+                        setProgress(0);
+                        //Deduct costs + Add rewards
+                    }
+                    else {
+                        dispatch(setCurrentActivityRunning(false));
+                    }
                 }
             }, 100);
         }

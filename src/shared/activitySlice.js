@@ -142,6 +142,34 @@ export const selectPage = (state) => {
     return state.activity.currentPage;
 }
 
+export const selectCanStartActivity = (state) => {
+    console.log('canstart?')
+    let canStart = true;
+    const activity = state.activity.activities.find((cur) => cur.id === parseInt(state.activity.currentActivity));
+
+    if (activity.title === 'Combat') {
+        const health = state.activity.stats.find((cur) => cur.title === 'Health');
+        if (health.resource <= 0) {
+            return false;
+        }
+    }
+
+    activity.cost.forEach(el => {
+        if (el.title !== 'None') {
+            let activityConsumable = state.activity.activities.find((cur) => cur.consumableTitle === el.title);
+            if (!activityConsumable) {
+                activityConsumable = state.activity.stats.find((cur) => cur.consumableTitle === el.title);
+            }
+            if (activityConsumable.resource < el.amount) {
+                console.log('not enough');
+                canStart = false;
+            }
+        }
+    });
+
+    return canStart;
+}
+
 export const { setPage } = activitySlice.actions;
 
 export const selectSlotById = (id) => (state) => {

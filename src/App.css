@@ -94,6 +94,13 @@
   padding-right: 20px;
 }
 
+.list-text {
+  font-size: 23px;
+  text-align: right;
+  margin: 0;
+  padding-right: 20px;
+}
+
 .save-slot-1 {
   width: 80%;
   height: 100%;

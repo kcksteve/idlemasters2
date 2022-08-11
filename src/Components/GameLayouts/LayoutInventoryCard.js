@@ -21,7 +21,7 @@ const LayoutInventoryCard = () => {
                                 <img
                                     src={ image }
                                     alt={ "inventory icon " + title }
-                                    className={'inv-icon' + ( isConsumable ? " clickable" : "" )}
+                                    className={'inv-icon' + ( isConsumable && resource > 0 ? " clickable" : "" )}
                                     onClick={() => {
                                         if (isConsumable && resource > 0) {
                                             dispatch(updateStat({

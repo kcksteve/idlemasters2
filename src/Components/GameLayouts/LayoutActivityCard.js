@@ -1,10 +1,11 @@
 import { Row, Col, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCanStartActivity, selectCurrentActivity, selectCurrentActivityRunning, setCurrentActivityRunning } from "../../shared/activitySlice";
+import { selectCanStartActivity, selectCurrentActivity, selectCurrentActivityRunning, setCurrentActivityRunning, selectActivityById } from "../../shared/activitySlice";
 import LoadingBar from "./LoadingBar";
 
 const LayoutActivityCard = () => {
     const currentActivity = useSelector(selectCurrentActivity);
+    const smithing = useSelector(selectActivityById(5));
     const currentActivityRunning = useSelector(selectCurrentActivityRunning);
     const canStartActivivty = useSelector(selectCanStartActivity);
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const LayoutActivityCard = () => {
         <Row className='ui-bg mx-lg-5 mx-1 my-5 py-4'>
             <Row className="m-0 px-4 pb-5 pt-2">
                 <Col xs='12'>
-                    <LoadingBar duration={10}/>
+                    <LoadingBar duration={3 + (4 - (4 * (currentActivity.level / 100))) + (4 - (4 * (smithing.level / 100)))}/>
                 </Col>
             </Row>
             <Row className="m-0 p-0">

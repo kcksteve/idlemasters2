@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentActivityRunning, setCurrentActivityRunning, selectCanStartActivity } from "../../shared/activitySlice";
+import { selectCurrentActivityRunning, setCurrentActivityRunning, selectCanStartActivity, applyCostReward } from "../../shared/activitySlice";
 
 const LoadingBar = ({ duration }) => {
     const [progress, setProgress] = useState(0);
@@ -31,19 +31,20 @@ const LoadingBar = ({ duration }) => {
         let myTimeout = null;
         if (elapsed > 0) {
             myTimeout = setTimeout(() => {
-                if (progress < 100) {
-                    setElapsed(elapsed + 0.1);
-                    setProgress(Math.min(elapsed / duration * 100, 100));
-                }
-                else {
-                    if (canStartActivity) {
-                        setElapsed(0.1);
-                        setProgress(0);
-                        //Deduct costs + Add rewards
+                if (canStartActivity) {
+                    if (progress < 100) {
+                        setElapsed(elapsed + 0.1);
+                        setProgress(Math.min(elapsed / duration * 100, 100));
                     }
                     else {
-                        dispatch(setCurrentActivityRunning(false));
+                        setElapsed(0.1);
+                        setProgress(0);
+                        dispatch(applyCostReward(''));
                     }
+                }
+                else {
+                    stopLoop();
+                    dispatch(setCurrentActivityRunning(false));
                 }
             }, 100);
         }

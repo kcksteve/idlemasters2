@@ -5,10 +5,15 @@ import SplashPage from './pages/SplashPage';
 import { Container } from 'reactstrap';
 import { selectPage } from './shared/activitySlice';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 
 function App() {
   const page = useSelector(selectPage);
+
+  useEffect(() => {
+    document.title = 'Idle Masters Reforged';
+  });
 
   return (
     <div className="App">
